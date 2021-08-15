@@ -3,17 +3,15 @@
 -
   type: github
   icon: 'fab fa-github-alt'
+
 -
-  type: twitter
-  icon: 'fab fa-twitter'
--
-  type: email
+  type: blibli
+  icon: 'fab fa-youtube'   # icons powered by <https://fontawesome.com/>
+  url:  'https://space.bilibili.com/46113303'                  # Fill with your mastodon account page
+
+- type: email
   icon: 'fas fa-envelope'
   noblank: true            # open link in current tab
--
-  type: rss
-  icon: 'fas fa-rss'
-  noblank: true
 
 # Uncomment and complete the url below to enable more contact options
 # -

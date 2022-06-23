@@ -15,7 +15,7 @@ popup类组件的特征是：用户触发（hover\click...）时展示，且组�
 ## 思路
 我们用antd的popconfirm进行举例，起内部调用关系如下：
 
-![[截屏2022-06-23 下午1.07.35.png]]
+<img src="https://github.com/qianghe/blogs/blob/main/imgs/antd-popconfirm.png?raw=true" />
 
 在Popup组件的实现中，使用CSSMotion对组件的显隐进行动画展示（组件内置）; enter\appear\leave状态均使用了此动画时长。
 
@@ -34,24 +34,23 @@ popup类组件的特征是：用户触发（hover\click...）时展示，且组�
 1. 自定义挂载容器节点，当popconfirm的弹窗真正被挂载时，进行下一步的事件监听。
 	
 ```javascript
-	const observer = new MutationObserver((mutationsList) => {
-		for (const mutation of mutationsList) {
-			if (mutation.type === 'childList') {
-			
-				const newNode = mutation.addedNodes[0];
-				const targetNode = getTargetDom(newNode);
-				if (!targetNode) return;
-				// 挂在后进行事件监听
-                unListener = registerAEListenEvent(targetNode);
-			}
+const observer = new MutationObserver((mutationsList) => {
+	for (const mutation of mutationsList) {
+		if (mutation.type === 'childList') {
+			const newNode = mutation.addedNodes[0];
+			const targetNode = getTargetDom(newNode);
+			if (!targetNode) return;
+			// 挂在后进行事件监听
+			unListener = registerAEListenEvent(targetNode);
 		}
-	});
-   // 对容器节点只进行childList属性变化的监听，即监听何时挂载portal组件
-    observer.observe(observeDom, {
-		subtree: false,
-		attributes: false,
-		childList: true,
-	});
+	}
+});
+	// 对容器节点只进行childList属性变化的监听，即监听何时挂载portal组件
+observer.observe(observeDom, {
+	subtree: false,
+	attributes: false,
+	childList: true,
+});
 
 ```
 

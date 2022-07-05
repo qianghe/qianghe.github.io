@@ -57,7 +57,7 @@ let rightLoc = this._findIndex(right, 1)
 
 那么针对querySeg，我们通过二分查找，分别找到了leftLoc和rightLoc。（通过二分查找出的loc，包含等于的情况，因此我们需要注意此处的边界条件！）。
 
-![](https://cdn.nlark.com/yuque/0/2022/jpeg/388960/1657009527633-209a3041-39fb-4722-a275-ca99b8afebb3.jpeg)
+<img src="https://cdn.nlark.com/yuque/0/2022/jpeg/388960/1657009527633-209a3041-39fb-4722-a275-ca99b8afebb3.jpeg" />
 
 分情况分析：
 1.  排除边界（图中的情况A、B）
@@ -101,7 +101,7 @@ RangeModule.prototype.queryRange = function(left, right) {
 let leftLoc = this._findIndex(left, 0)
 let rightLoc = this._findIndex(right, 1)
 
-![](https://cdn.nlark.com/yuque/0/2022/jpeg/388960/1657012289333-9860149f-34c5-4c59-8660-ab316841247d.jpeg)
+<img src="https://cdn.nlark.com/yuque/0/2022/jpeg/388960/1657012289333-9860149f-34c5-4c59-8660-ab316841247d.jpeg" />
 
 ```javascript
 RangeModule.prototype.addRange = function(left, right) {
@@ -148,7 +148,7 @@ let leftLoc = this._findIndex(left, 0)
 let rightLoc = this._findIndex(right, 1)
 ```
 
-![](https://cdn.nlark.com/yuque/0/2022/jpeg/388960/1657012360910-38c5c413-eb30-4179-83db-3d6c39b0a93a.jpeg)
+<img src="https://cdn.nlark.com/yuque/0/2022/jpeg/388960/1657012360910-38c5c413-eb30-4179-83db-3d6c39b0a93a.jpeg" />
 
 情况分析：
 
@@ -226,10 +226,10 @@ RangeModule.prototype.removeRange = function(left, right) {
 这道题我觉得比较难处理的是对边界的考虑，包括二分查找中还包括等于的情况。但基于上面的分析，其实主要逻辑就是：
 
 1. 处理边界；
-
 2.  修复二分查找的index；
 3.  对leftLoc、rightLoc所定位的seg，针对不同场景进行判断：
+   * query判断是否为同一个seg，且是其交叉seg的子集；
+   
+   * add判断插入的点几插入区间范围；
 
-1.  query判断是否为同一个seg，且是其交叉seg的子集；
-2.  add判断插入的点几插入区间范围；
-3.  remove判断删除的点及删除后新的seg。
+   * remove判断删除的点及删除后新的seg。

@@ -57,9 +57,9 @@ let rightLoc = this._findIndex(right, 1)
 
 那么针对querySeg，我们通过二分查找，分别找到了leftLoc和rightLoc。（通过二分查找出的loc，包含等于的情况，因此我们需要注意此处的边界条件！）。
 
-<img src="https://cdn.nlark.com/yuque/0/2022/jpeg/388960/1657009527633-209a3041-39fb-4722-a275-ca99b8afebb3.jpeg" />
+<img src="https://github.com/qianghe/blogs/blob/main/imgs/query-flow.jpeg?raw=true" />
 
-分情况分析：
+情况分析：
 1.  排除边界（图中的情况A、B）
 	
 	1.1.  左边界：leftLoc === 0，seg1.left < querySeg.left ，说明超出左边界，返回false；
@@ -98,11 +98,27 @@ RangeModule.prototype.queryRange = function(left, right) {
 
 插入段落insertSeg[a, b]。
 
+```javascript
 let leftLoc = this._findIndex(left, 0)
 let rightLoc = this._findIndex(right, 1)
+```
+针对insertSeg，通过二分查找，分别找到了leftLoc和rightLoc。
 
-<img src="https://cdn.nlark.com/yuque/0/2022/jpeg/388960/1657012289333-9860149f-34c5-4c59-8660-ab316841247d.jpeg" />
+<img src="https://github.com/qianghe/blogs/blob/main/imgs/add-flow.jpeg?raw=true" />
 
+情况分析：
+1. 与当前segs有交集，即：this.queryRange(insergSeg) === true，不需要进行插入；
+2. 与当前segs无交集，且在边界处：
+  a. 情况A，leftLoc === len，并且当前segs的右边缘seg4.right < querySeg.left，直接插入到尾部this.segs.push(querySeg)；
+  b. 情况B，rightLoc === 0, 并且当前segs的左边缘seg1.left > query.right， 直接插入到头部	this.segs.unshift(querySeg)；
+3. 与当前segs无交集，且不在边界处，修正leftLoc及rightLoc（情况C、D），直接进行splice操作，覆盖的seg数量为rightLoc - leftLoc + 1，新的seg其左右值;
+  
+  left: Math.min(left,this.segs[leftLoc][0])
+  
+  right: rightLoc === len ? right : Math.max(right,this.segs[rightLoc][1])
+
+
+实现如下：
 ```javascript
 RangeModule.prototype.addRange = function(left, right) {
   if (this._isEmtpy()) {
@@ -148,7 +164,9 @@ let leftLoc = this._findIndex(left, 0)
 let rightLoc = this._findIndex(right, 1)
 ```
 
-<img src="https://cdn.nlark.com/yuque/0/2022/jpeg/388960/1657012360910-38c5c413-eb30-4179-83db-3d6c39b0a93a.jpeg" />
+针对removeSeg，通过二分查找，分别找到了leftLoc和rightLoc。
+
+<img src="https://github.com/qianghe/blogs/blob/main/imgs/remove-flow.jpeg?raw=true" />
 
 情况分析：
 
@@ -229,7 +247,7 @@ RangeModule.prototype.removeRange = function(left, right) {
 2.  修复二分查找的index；
 3.  对leftLoc、rightLoc所定位的seg，针对不同场景进行判断：
    * query判断是否为同一个seg，且是其交叉seg的子集；
-   
+
    * add判断插入的点几插入区间范围；
 
    * remove判断删除的点及删除后新的seg。

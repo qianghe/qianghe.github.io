@@ -18,7 +18,7 @@ categories: redux redux-tooltik immer
 写到这里我已经感到痛心疾首了，我们为了解决一个问题，又引入了另一问题；但是还好这个世界总是有“聪明的人”存在，开发出省时省力的工具，帮助开发人员们降低理解及使用成本（羡慕不已）。
 
 
-## 自身角度
+## 使用体验
 从我自己使用RTK来说，我个人感觉很好用的就是其文档中描述的：
   1. 降低了写reducer及action的成本，通过createSlice即可返回需要的reducers、actions；
   

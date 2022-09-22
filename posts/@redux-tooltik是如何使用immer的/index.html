@@ -1,0 +1,291 @@
+<!DOCTYPE html><html lang="zh-CN" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="day-prompt" content="天前"><meta name="hour-prompt" content="小时前"><meta name="minute-prompt" content="分钟前"><meta name="justnow-prompt" content="刚刚"><meta name="generator" content="Jekyll v4.2.2" /><meta property="og:title" content="@redux-tooltik是如何使用immer的？" /><meta property="og:locale" content="zh_CN" /><meta name="description" content="一些碎碎念" /><meta property="og:description" content="一些碎碎念" /><link rel="canonical" href="/posts/@redux-tooltik%E6%98%AF%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8immer%E7%9A%84/" /><meta property="og:url" content="/posts/@redux-tooltik%E6%98%AF%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8immer%E7%9A%84/" /><meta property="og:site_name" content="UnlimitedZone" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2022-07-08T15:20:54+08:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="@redux-tooltik是如何使用immer的？" /><meta name="twitter:site" content="@twitter_username" /><meta name="google-site-verification" content="google_meta_tag_verification" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-07-08T16:34:48+08:00","datePublished":"2022-07-08T15:20:54+08:00","description":"一些碎碎念","headline":"@redux-tooltik是如何使用immer的？","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/@redux-tooltik%E6%98%AF%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8immer%E7%9A%84/"},"url":"/posts/@redux-tooltik%E6%98%AF%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8immer%E7%9A%84/"}</script><title>@redux-tooltik是如何使用immer的？ | UnlimitedZone</title><link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/assets/img/favicons/site.webmanifest"><link rel="shortcut icon" href="/assets/img/favicons/favicon.ico"><meta name="apple-mobile-web-app-title" content="UnlimitedZone"><meta name="application-name" content="UnlimitedZone"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://fonts.gstatic.com"><link rel="preconnect" href="https://www.google-analytics.com" crossorigin="use-credentials"><link rel="dns-prefetch" href="https://www.google-analytics.com"><link rel="preconnect" href="https://www.googletagmanager.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="preconnect" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css"><link rel="stylesheet" href="/assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css"> <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script><body data-spy="scroll" data-target="#toc"><div id="sidebar" class="d-flex flex-column align-items-end" lang="zh-CN"><div class="profile-wrapper text-center"><div id="avatar"> <a href="/" alt="avatar" class="mx-auto"> <img src="https://i.pinimg.com/564x/ad/f4/05/adf40538d318ed1173f509d7b53fa512.jpg" alt="avatar" onerror="this.style.display='none'"> </a></div><div class="site-title mt-3"> <a href="/">UnlimitedZone</a></div><div class="site-subtitle font-italic">learn as if you know nothing</div></div><ul class="w-100"><li class="nav-item"> <a href="/" class="nav-link"> <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i> <span>首页</span> </a><li class="nav-item"> <a href="/categories/" class="nav-link"> <i class="fa-fw fas fa-stream ml-xl-3 mr-xl-3 unloaded"></i> <span>分类</span> </a><li class="nav-item"> <a href="/archives/" class="nav-link"> <i class="fa-fw fas fa-archive ml-xl-3 mr-xl-3 unloaded"></i> <span>归档</span> </a><li class="nav-item"> <a href="/about/" class="nav-link"> <i class="fa-fw fas fa-info ml-xl-3 mr-xl-3 unloaded"></i> <span>关于</span> </a></ul><div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center align-items-center"> <a href="https://github.com/qianghe" aria-label="github" class="order-3" target="_blank" rel="noopener"> <i class="fab fa-github-alt"></i> </a> <a href="https://space.bilibili.com/46113303" aria-label="blibli" class="order-4" target="_blank" rel="noopener"> <i class="fab fa-youtube"></i> </a> <a href=" javascript:location.href = 'mailto:' + ['hqiswonder','gmail.com'].join('@')" aria-label="email" class="order-5" > <i class="fas fa-envelope"></i> </a> <span class="icon-border order-2"></span> <span id="mode-toggle-wrapper" class="order-1"> <i class="mode-toggle fas fa-adjust"></i> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return "mode"; } static get DARK_MODE() { return "dark"; } static get LIGHT_MODE() { return "light"; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } var self = this; /* always follow the system prefers */ this.sysDarkPrefers.addListener(function() { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.updateMermaid(); }); } /* constructor() */ setDark() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { $('html').removeAttr(ModeToggle.MODE_KEY); sessionStorage.removeItem(ModeToggle.MODE_KEY); } get sysDarkPrefers() { return window.matchMedia("(prefers-color-scheme: dark)"); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode == ModeToggle.DARK_MODE; } get isLightMode() { return this.mode == ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer) ) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } updateMermaid() { if (typeof mermaid !== "undefined") { let expectedTheme = (this.modeStatus === ModeToggle.DARK_MODE? "dark" : "default"); let config = { theme: expectedTheme }; /* re-render the SVG › <https://github.com/mermaid-js/mermaid/issues/311#issuecomment-332557344> */ $(".mermaid").each(function() { let svgCode = $(this).prev().children().html(); $(this).removeAttr("data-processed"); $(this).html(svgCode); }); mermaid.initialize(config); mermaid.init(undefined, ".mermaid"); } } flipMode() { if (this.hasMode) { if (this.isSysDarkPrefer) { if (this.isLightMode) { this.clearMode(); } else { this.setLight(); } } else { if (this.isDarkMode) { this.clearMode(); } else { this.setDark(); } } } else { if (this.isSysDarkPrefer) { this.setLight(); } else { this.setDark(); } } this.updateMermaid(); } /* flipMode() */ } /* ModeToggle */ let toggle = new ModeToggle(); $(".mode-toggle").click(function() { toggle.flipMode(); }); </script> </span></div></div><div id="topbar-wrapper" class="row justify-content-center topbar-down"><div id="topbar" class="col-11 d-flex h-100 align-items-center justify-content-between"> <span id="breadcrumb"> <span> <a href="/"> 首页 </a> </span> <span>@redux-tooltik是如何使用immer的？</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> 文章</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="搜索..."> <i class="fa fa-times-circle fa-fw" id="search-cleaner"></i> </span> <span id="search-cancel" >取消</span></div></div><div id="main-wrapper"><div id="main"><div class="row"><div id="post-wrapper" class="col-12 col-lg-11 col-xl-8"><div class="post pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><h1 data-toc-skip>@redux-tooltik是如何使用immer的？</h1><div class="post-meta text-muted d-flex flex-column"><div> <span class="semi-bold"> WonderQrunMan </span> 发表于 <span class="timeago " data-toggle="tooltip" data-placement="bottom" title="2022-07-08, 15:20 +0800" >07-08<i class="unloaded">2022-07-08T15:20:54+08:00</i> </span></div><div> <span> 更新于 <span class="timeago lastmod" data-toggle="tooltip" data-placement="bottom" title="2022-07-08, 16:34 +0800" >07-08<i class="unloaded">2022-07-08T16:34:48+08:00</i> </span> </span> <span class="readtime" data-toggle="tooltip" data-placement="bottom" title="2142 字">11 分钟 阅读</span></div></div><div class="post-content"><h2 id="一些碎碎念">一些碎碎念</h2><p>使用redux，是为了做复杂的数据管理；但对于很多使用redux的人来说，配置繁琐而重复的模版文件，简直是一场永无止尽的噩梦。</p><ul><li>我们需要reducer；<li>我们需要action;<li>我们需要异步action；<li><p>我们需要确认，在reducer中修改嵌套过深的state是否有效，否则会导致react-redux中判断shouldComponentUpdate失效，从而无法进行组件re-render；</p><p>…</p></ul><p>写到这里我已经感到痛心疾首了，我们为了解决一个问题，又引入了另一问题；但是还好这个世界总是有“聪明的人”存在，开发出省时省力的工具，帮助开发人员们降低理解及使用成本（羡慕不已）。</p><h2 id="使用体验">使用体验</h2><p>从我自己使用RTK来说，我个人感觉很好用的就是其文档中描述的：</p><ol><li><p>降低了写reducer及action的成本，通过createSlice即可返回需要的reducers、actions；</p><li><p>降低了对异步action的处理成本，通过createAsyncThunk返回一个创建promise请求的createAction，这个promise可以被中途取消；createAction同样返回了pending\fufilled\rejected的同步action，便于用户直接在exteralReducers中针对三种情况进行state的更新：</p></ol><div class="language-javascript highlighter-rouge"><div class="code-header"> <span text-data=" JavaScript "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed=""><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre><td class="rouge-code"><pre><span class="nx">extraReducers</span><span class="p">:</span> <span class="p">(</span><span class="nx">builder</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">builder</span><span class="p">.</span><span class="nx">addCase</span><span class="p">(</span><span class="nx">fetchPreviewImage</span><span class="p">.</span><span class="nx">pending</span><span class="p">,</span> <span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">url</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">loading</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">});</span>
+    <span class="nx">builder</span><span class="p">.</span><span class="nx">addCase</span><span class="p">(</span><span class="nx">fetchPreviewImage</span><span class="p">.</span><span class="nx">fulfilled</span><span class="p">,</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">url</span> <span class="o">=</span> <span class="nx">action</span><span class="p">.</span><span class="nx">payload</span><span class="p">?.</span><span class="nx">imageUrl</span><span class="p">;</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">loading</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">});</span>
+    <span class="nx">builder</span><span class="p">.</span><span class="nx">addCase</span><span class="p">(</span><span class="nx">fetchPreviewImage</span><span class="p">.</span><span class="nx">rejected</span><span class="p">,</span> <span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">url</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">loading</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">});</span>
+  <span class="p">},</span>
+</pre></table></code></div></div><ol><li>在createSlice/createReducer中自动引入了immer，我们可以终于可以从“解构构造新对象返回state的方式”，直接跳到“直接修改state”的直观防止，即：</ol><div class="language-javascript highlighter-rouge"><div class="code-header"> <span text-data=" JavaScript "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed=""><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre><td class="rouge-code"><pre>  <span class="c1">// 解构重组方式</span>
+  <span class="kd">function</span> <span class="nx">updateVeryNestedField</span><span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="p">...</span><span class="nx">state</span><span class="p">,</span>
+      <span class="na">first</span><span class="p">:</span> <span class="p">{</span>
+        <span class="p">...</span><span class="nx">state</span><span class="p">.</span><span class="nx">first</span><span class="p">,</span>
+        <span class="na">second</span><span class="p">:</span> <span class="p">{</span>
+          <span class="p">...</span><span class="nx">state</span><span class="p">.</span><span class="nx">first</span><span class="p">.</span><span class="nx">second</span><span class="p">,</span>
+          <span class="p">[</span><span class="nx">action</span><span class="p">.</span><span class="nx">someId</span><span class="p">]:</span> <span class="p">{</span>
+            <span class="p">...</span><span class="nx">state</span><span class="p">.</span><span class="nx">first</span><span class="p">.</span><span class="nx">second</span><span class="p">[</span><span class="nx">action</span><span class="p">.</span><span class="nx">someId</span><span class="p">],</span>
+            <span class="na">fourth</span><span class="p">:</span> <span class="nx">action</span><span class="p">.</span><span class="nx">someValue</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+</pre></table></code></div></div><div class="language-javascript highlighter-rouge"><div class="code-header"> <span text-data=" JavaScript "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed=""><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre><td class="rouge-code"><pre>  <span class="c1">// immer直接修改的方式</span>
+  <span class="kd">function</span> <span class="nx">updateNestedState</span><span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">nestedState</span> <span class="o">=</span> <span class="nx">state</span><span class="p">.</span><span class="nx">nestedState</span>
+    <span class="c1">// ERROR: this directly modifies the existing object reference - don't do this!</span>
+    <span class="nx">nestedState</span><span class="p">.</span><span class="nx">nestedField</span> <span class="o">=</span> <span class="nx">action</span><span class="p">.</span><span class="nx">data</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="p">...</span><span class="nx">state</span><span class="p">,</span>
+      <span class="nx">nestedState</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+</pre></table></code></div></div><p>之所以要内置immer，作者在<a href="https://redux-toolkit.js.org/usage/immer-reducers#why-immer-is-built-in">文档</a>中也解释的很清楚了：immutable的数据结构在reducer修改中更为可读，并且其直接修改的方式降低了解构生成对象引入bug的问题。</p><p>文档中推荐的RTK自带的query功能，帮助fetch及缓存的相关功能，我是用的项目上暂时还未涉猎。</p><p>（因为没有很细致的看文档）在开发调试期间，出现了一个让我很困惑的问题，createSlice中reducer函数打印出的state竟然是Proxy对象，如下：</p><p><img data-proofer-ignore data-src="https://github.com/qianghe/blogs/blob/main/imgs/immer-proxy.png?raw=true" height="80" /></p><p>调试到这里的时候，我整个人都惊呆了；当时还没看createSlice的源码（且没有细读文档…），并不知道其使用immer对象中proxy的神奇之处。当时黑人问号缀满了我的扁平的额头：redux中reducer需要返回的state应该是纯js对象呀，现在返回proxy是什么情况，那middleware在dispatch的过程中又是这么处理这个proxy的呢？</p><p>带着这个愚蠢的疑问（是我想的复杂了…）去看了源码实现。</p><h3 id="createslice做了什么">createSlice做了什么？</h3><p><img data-proofer-ignore data-src="https://github.com/qianghe/blogs/blob/main/imgs/createSlice-demo.png?raw=true" width="280" /></p><p>createSlice通过用户定义的reducers及name等，返回了一个slice对象，这个对象包含了actions、reducer等我们业务需要的对象：</p><ul><li>多个reducer可以通过redux提供的combineReducers方法进行整合；<li>actions用于我们出发dispatch的调用（不需要我们额外的通过createAction创建了）；</ul><p>在createSlice函数中返回的reducer如下：</p><div class="language-javascript highlighter-rouge"><div class="code-header"> <span text-data=" JavaScript "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed=""><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre><span class="nx">reducer</span><span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="p">{</span>
+   <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">_reducer</span><span class="p">)</span> <span class="nx">_reducer</span> <span class="o">=</span> <span class="nx">buildReducer</span><span class="p">()</span>
+
+   <span class="k">return</span> <span class="nx">_reducer</span><span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span>
+ <span class="p">},</span>
+</pre></table></code></div></div><p>其调用了buildReducer：</p><div class="language-javascript highlighter-rouge"><div class="code-header"> <span text-data=" JavaScript "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed=""><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre><td class="rouge-code"><pre><span class="kd">function</span> <span class="nx">buildReducer</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span>
+    <span class="nx">extraReducers</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="nx">actionMatchers</span> <span class="o">=</span> <span class="p">[],</span>
+    <span class="nx">defaultCaseReducer</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">,</span>
+  <span class="p">]</span> <span class="o">=</span>
+    <span class="k">typeof</span> <span class="nx">options</span><span class="p">.</span><span class="nx">extraReducers</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">function</span><span class="dl">'</span>
+      <span class="p">?</span> <span class="nx">executeReducerBuilderCallback</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">extraReducers</span><span class="p">)</span>
+      <span class="p">:</span> <span class="p">[</span><span class="nx">options</span><span class="p">.</span><span class="nx">extraReducers</span><span class="p">]</span>
+
+  <span class="kd">const</span> <span class="nx">finalCaseReducers</span> <span class="o">=</span> <span class="p">{</span> <span class="p">...</span><span class="nx">extraReducers</span><span class="p">,</span> <span class="p">...</span><span class="nx">sliceCaseReducersByType</span> <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">createReducer</span><span class="p">(</span>
+    <span class="nx">initialState</span><span class="p">,</span>
+    <span class="nx">finalCaseReducers</span> <span class="k">as</span> <span class="nx">any</span><span class="p">,</span>
+    <span class="nx">actionMatchers</span><span class="p">,</span>
+    <span class="nx">defaultCaseReducer</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>buildReducer中整合了当前slice 的所有reducers，用户自定义的reducer及exterReducers；并返回了createReducer函数执行的结果。我们大概可以预估下这个返回结果，它其实是一个大的reducer处理器，它获取了当前的state及action并进行处理，执行符合触发的action.type的reducer：</p><div class="language-javascript highlighter-rouge"><div class="code-header"> <span text-data=" JavaScript "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed=""><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre><td class="rouge-code"><pre><span class="c1">// 模拟返回</span>
+<span class="nx">reducer</span><span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// filterReducers 复合action的</span>
+  <span class="c1">// 顺序执行filterReducers</span>
+  <span class="nx">filterReducers</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">preState</span><span class="p">,</span> <span class="nx">filterReducer</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">//...</span>
+    <span class="kd">const</span> <span class="nx">nextState</span> <span class="o">=</span> <span class="nx">filterReducer</span><span class="p">(</span><span class="nx">preState</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nx">nextState</span>
+  <span class="p">},</span> <span class="nx">state</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>在真实的createReducer中，直接看其返回的对象：</p><div class="language-javascript highlighter-rouge"><div class="code-header"> <span text-data=" JavaScript "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed=""><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre><td class="rouge-code"><pre><span class="k">return</span> <span class="kd">function</span> <span class="nx">reducer</span><span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+  <span class="k">return</span> <span class="nx">caseReducers</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">previousState</span><span class="p">,</span> <span class="nx">caseReducer</span><span class="p">):</span> <span class="nx">S</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">caseReducer</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">isDraft</span><span class="p">(</span><span class="nx">previousState</span><span class="p">))</span> <span class="p">{</span>
+          <span class="c1">//...</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isDraftable</span><span class="p">(</span><span class="nx">previousState</span><span class="p">))</span> <span class="p">{</span>
+        <span class="c1">//...</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">createNextState</span><span class="p">(</span><span class="nx">previousState</span><span class="p">,</span> <span class="p">(</span><span class="na">draft</span><span class="p">:</span> <span class="nx">Draft</span><span class="o">&lt;</span><span class="nx">S</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="nx">caseReducer</span><span class="p">(</span><span class="nx">draft</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span>
+        <span class="p">})</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nx">previousState</span>
+  <span class="p">},</span> <span class="nx">state</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>其处理的方式和预想的差不多，其中isDraft和isDraftable是对immer结构的判断；直接看下是原生js对象的情况，其else的处理，返回了一个createNextState函数执行的结果，这个函数同样是immer提供的。</p><h3 id="createslice中如何使用了immer">createSlice中如何使用了immer？</h3><p>接着上面说，createNextState函数一定返回的是纯js结构，这样就解答我上面提出的愚蠢疑问…</p><div class="language-javascript highlighter-rouge"><div class="code-header"> <span text-data=" JavaScript "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed=""><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre><span class="k">return</span> <span class="nx">createNextState</span><span class="p">(</span><span class="nx">previousState</span><span class="p">,</span> <span class="p">(</span><span class="nx">draft</span><span class="p">:</span> <span class="nx">Draft</span><span class="o">&lt;</span><span class="nx">S</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">caseReducer</span><span class="p">(</span><span class="nx">draft</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span>
+<span class="p">})</span>
+</pre></table></code></div></div><p>函数的第二参数，即一个回调函数，其入参是draft（即immer提供的proxy对象），其作为reducer的如参，代替了之前的state，因此我们可以在createSlice的reducer中直接修改state，因为这时的state已经是immer对象创建的proxy代理对象了，其内置了set\get等方法，可以让我们直接对对象、数组、Map、Set进行直接操作。</p><p><strong>这个proxy的结构：</strong></p><div class="language-typescript highlighter-rouge"><div class="code-header"> <span text-data=" TypeScript "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed=""><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+</pre><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">state</span><span class="p">:</span> <span class="nx">ProxyState</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">type_</span><span class="p">:</span> <span class="nx">isArray</span> <span class="p">?</span> <span class="nx">ProxyType</span><span class="p">.</span><span class="nx">ProxyArray</span> <span class="p">:</span> <span class="p">(</span><span class="nx">ProxyType</span><span class="p">.</span><span class="nx">ProxyObject</span> <span class="k">as</span> <span class="kr">any</span><span class="p">),</span>
+    <span class="c1">// Track which produce call this is associated with.</span>
+    <span class="na">scope_</span><span class="p">:</span> <span class="nx">parent</span> <span class="p">?</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">scope_</span> <span class="p">:</span> <span class="nx">getCurrentScope</span><span class="p">()</span><span class="o">!</span><span class="p">,</span>
+    <span class="c1">// True for both shallow and deep changes.</span>
+    <span class="na">modified_</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="c1">// Used during finalization.</span>
+    <span class="na">finalized_</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="c1">// Track which properties have been assigned (true) or deleted (false).</span>
+    <span class="na">assigned_</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="c1">// The parent draft state.</span>
+    <span class="na">parent_</span><span class="p">:</span> <span class="nx">parent</span><span class="p">,</span>
+    <span class="c1">// The base state.</span>
+    <span class="na">base_</span><span class="p">:</span> <span class="nx">base</span><span class="p">,</span>
+    <span class="c1">// The base proxy.</span>
+    <span class="na">draft_</span><span class="p">:</span> <span class="kc">null</span> <span class="k">as</span> <span class="kr">any</span><span class="p">,</span> <span class="c1">// set below</span>
+    <span class="c1">// The base copy with any updated values.</span>
+    <span class="na">copy_</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="c1">// Called by the `produce` function.</span>
+    <span class="na">revoke_</span><span class="p">:</span> <span class="kc">null</span> <span class="k">as</span> <span class="kr">any</span><span class="p">,</span>
+    <span class="na">isManual_</span><span class="p">:</span> <span class="kc">false</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>createNextState函数即是immer提供的produce对象方法（核心流程）：</p><div class="language-javascript highlighter-rouge"><div class="code-header"> <span text-data=" JavaScript "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed=""><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre><td class="rouge-code"><pre><span class="k">if</span> <span class="p">(</span><span class="nx">isDraftable</span><span class="p">(</span><span class="nx">base</span><span class="p">))</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">scope</span> <span class="o">=</span> <span class="nx">enterScope</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+  <span class="c1">// 通过原始的base，即state，构造了一个proxy对象；</span>
+  <span class="kd">const</span> <span class="nx">proxy</span> <span class="o">=</span> <span class="nx">createProxy</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">base</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">)</span>
+  <span class="kd">let</span> <span class="nx">hasError</span> <span class="o">=</span> <span class="kc">true</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="c1">// recipe在此处即使我们的reducer</span>
+    <span class="nx">result</span> <span class="o">=</span> <span class="nx">recipe</span><span class="p">(</span><span class="nx">proxy</span><span class="p">)</span>
+    <span class="nx">hasError</span> <span class="o">=</span> <span class="kc">false</span>
+  <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+    <span class="c1">// finally instead of catch + rethrow better preserves original stack</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">hasError</span><span class="p">)</span> <span class="nx">revokeScope</span><span class="p">(</span><span class="nx">scope</span><span class="p">)</span>
+    <span class="k">else</span> <span class="nx">leaveScope</span><span class="p">(</span><span class="nx">scope</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="c1">// ...</span>
+  <span class="nx">usePatchesInScope</span><span class="p">(</span><span class="nx">scope</span><span class="p">,</span> <span class="nx">patchListener</span><span class="p">)</span>
+  <span class="c1">// 返回处理的结果</span>
+  <span class="k">return</span> <span class="nx">processResult</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="nx">scope</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>在执行reducer的过程中，对state的修改，都会通过proxy对象的traps进行记录和更新，比如set方法，如果对属性进行了更新，会同步到proxy.copy_解构中，这是修改的新的satate的内容，是一个纯js对象。</p><div class="language-javascript highlighter-rouge"><div class="code-header"> <span text-data=" JavaScript "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed=""><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">objectTraps</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="kd">set</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">prop</span><span class="p">,</span> <span class="nx">value</span><span class="p">){</span>
+    <span class="c1">//...</span>
+    <span class="c1">// 改变会同步到state.copy_上</span>
+    <span class="nx">state</span><span class="p">.</span><span class="nx">copy_</span><span class="o">!</span><span class="p">[</span><span class="nx">prop</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span>
+		<span class="nx">state</span><span class="p">.</span><span class="nx">assigned_</span><span class="p">[</span><span class="nx">prop</span><span class="p">]</span> <span class="o">=</span> <span class="kc">true</span>
+		<span class="k">return</span> <span class="kc">true</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>因此可以想到processResult返回的就是state.copy_（有新的修改）或者sate.base_（无修改）。</p><h3 id="最后的巴啦啦">最后的巴啦啦</h3><p>到此，上面关于本人提出的疑惑终于解答了：mmer解构只在createSlice/createReducer的reducer中使用了，而其执行后返回的nextState仍然是一个纯js对象。</p><p>阅读代码的过程中，是一个能更快速了解作者设计意图和实现方式的过程（其实文档中有很多处写到了，但是实在没有好好的阅读），也是自己学习他人设计和实现的便捷路径。我很喜欢作者面对网友质疑的态度，一个开源包的设计是要满足大部分人的场景需求的，但是也不能一味的迎合所有使用者的要求，比如“在createSlice中是否可以关闭immer的使用”这个问题上也有诸多使用者提出了对这个功能的渴求，但作者还是坚持自己的设计理念，并贯彻始终。</p><p>感恩～～～</p><p><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3C/svg%3E" data-proofer-ignore data-src="https://github.com/qianghe/blogs/blob/main/imgs/3q-duck.png?raw=true" width="100" height="100" /></p></div><div class="post-tail-wrapper text-muted"><div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href='/categories/redux/'>redux</a>, <a href='/categories/redux-tooltik/'>redux-tooltik</a>, <a href='/categories/immer/'>immer</a></div><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"> 本文由作者按照 <a href="https://creativecommons.org/licenses/by/4.0/"> CC BY 4.0 </a> 进行授权</div><div class="share-wrapper"> <span class="share-label text-muted mr-1">分享</span> <span class="share-icons"> <a href="https://twitter.com/intent/tweet?text=@redux-tooltik是如何使用immer的？ - UnlimitedZone&url=/posts/@redux-tooltik%E6%98%AF%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8immer%E7%9A%84/" data-toggle="tooltip" data-placement="top" title="Twitter" target="_blank" rel="noopener" aria-label="Twitter"> <i class="fa-fw fab fa-twitter"></i> </a> <a href="https://www.facebook.com/sharer/sharer.php?title=@redux-tooltik是如何使用immer的？ - UnlimitedZone&u=/posts/@redux-tooltik%E6%98%AF%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8immer%E7%9A%84/" data-toggle="tooltip" data-placement="top" title="Facebook" target="_blank" rel="noopener" aria-label="Facebook"> <i class="fa-fw fab fa-facebook-square"></i> </a> <a href="https://telegram.me/share?text=@redux-tooltik是如何使用immer的？ - UnlimitedZone&url=/posts/@redux-tooltik%E6%98%AF%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8immer%E7%9A%84/" data-toggle="tooltip" data-placement="top" title="Telegram" target="_blank" rel="noopener" aria-label="Telegram"> <i class="fa-fw fab fa-telegram"></i> </a> <i id="copy-link" class="fa-fw fas fa-link small" data-toggle="tooltip" data-placement="top" title="" title-succeed=""> </i> </span></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 pl-2 text-muted topbar-down"><div class="access"><div id="access-lastmod" class="post"> <span>最近更新</span><ul class="post-content pl-0 pb-1 ml-1 mt-2"><li><a href="/posts/%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E5%9B%BE%E7%89%87%E7%9A%84%E5%AE%9E%E9%99%85%E7%B1%BB%E5%9E%8B/">如何判断图片的实际类型?</a><li><a href="/posts/@redux-tooltik%E6%98%AF%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8immer%E7%9A%84/">@redux-tooltik是如何使用immer的？</a><li><a href="/posts/LeetCode-Range-Module/">[Leetcode Range Module]-算法解析</a><li><a href="/posts/Popup%E5%A6%82%E4%BD%95%E8%BF%BD%E8%B8%AA%E5%AD%90%E7%BB%84%E4%BB%B6%E6%B8%B2%E6%9F%93%E6%97%B6%E6%9C%BA/">Popup如何追踪子组件渲染时机</a></ul></div></div><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.js"></script><div id="toc-wrapper" class="pl-0 pr-4 mb-5"> <span class="pl-3 pt-2 mb-2">文章内容</span><nav id="toc" data-toggle="toc"></nav></div></div></div><div class="row"><div class="col-12 col-lg-11 col-xl-8"><div id="post-extend-wrapper" class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><div id="related-posts" class="mt-5 mb-2 mb-sm-4"><h3 class="pt-2 mt-1 mb-4 ml-1" data-toc-skip>相关文章</h3><div class="card-deck mb-4"><div class="card"> <a href="/posts/%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E5%9B%BE%E7%89%87%E7%9A%84%E5%AE%9E%E9%99%85%E7%B1%BB%E5%9E%8B/"><div class="card-body"> <span class="timeago small" >07-15<i class="unloaded">2022-07-15T16:01:19+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>如何判断图片的实际类型?</h3><div class="text-muted small"><p> 背景 场景需要能够真实的判断图片的类型，针对上传等任务对不符合的文件类型在前端侧进行拦截。 比如用户将动态的webp图片类型手动改为png，只通过file.type检查文件的类型其实不是其actual type。 因此需要提供一种更为有效的方式来判断图片的真实类型。 解决方法 任何文件的实质都是一堆二进制，而有一个称为“magic number”的序列被标注为识别文件唯一类型的签名。...</p></div></div></a></div><div class="card"> <a href="/posts/js%E5%AE%9E%E7%8E%B0PriorityQueue%E7%B1%BB/"><div class="card-body"> <span class="timeago small" >09-16<i class="unloaded">2022-09-16T15:08:00+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>js实现PriorityQueue类</h3><div class="text-muted small"><p> js原生是没有提供这种复杂数据结构的（默默的羡慕一下java的世界）。 为什么需要这种结构的呢？这种结构的优势又是什么呢？ Queue vs PriorityQueue 我们对这个词都不陌生，女王，哦，不，是：队列。 队列的特点就是“先进先出”，进、出的时间效率都是O(1)；在js世界中，使用朴素的Array结构就可以模拟。那如果进、出都是有条件的，我们会怎么处理呢？ 比如，一堆学生在一...</p></div></div></a></div><div class="card"> <a href="/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%A7%A3%E5%86%B3%E6%95%B0%E6%8D%AE%E4%BE%9D%E8%B5%96%E7%9A%84%E9%97%AE%E9%A2%98/"><div class="card-body"> <span class="timeago small" >09-16<i class="unloaded">2022-09-16T15:08:00+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>如何使用数据结构解决数据依赖的问题</h3><div class="text-muted small"><p> 背景 比如如下的场景，在一个数据洞察的场景下，筛选器之间的值存在相互的依赖关系（但不会构成环）； 这个图中标注了筛选器之间的依赖关系。那我们如何能更好的抽象一种能力，去解决这种依赖关系呢？ 树结构 通过这个图和实际场景的逻辑关系，我们能发现，箭头是不会构成环的，否则会导致依赖无限循环下去。 根据上图的案例我们可以抽象出其有向图的结构： 比如，我们切换了province，那在图...</p></div></div></a></div></div></div><div class="post-navigation d-flex justify-content-between"> <a href="/posts/LeetCode-Range-Module/" class="btn btn-outline-primary" prompt="上一篇"><p>[Leetcode Range Module]-算法解析</p></a> <a href="/posts/%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E5%9B%BE%E7%89%87%E7%9A%84%E5%AE%9E%E9%99%85%E7%B1%BB%E5%9E%8B/" class="btn btn-outline-primary" prompt="下一篇"><p>如何判断图片的实际类型?</p></a></div></div></div></div><footer class="d-flex w-100 justify-content-center"><div class="d-flex justify-content-between align-items-center"><div class="footer-left"><p class="mb-0"> © 2022 <a href="https://github.com/qianghe">WonderQrunMan</a>. <span data-toggle="tooltip" data-placement="top" title="除非另有说明，本网站上的博客文章均由作者按照知识共享署名 4.0 国际 (CC BY 4.0) 许可协议进行授权。">保留部分权利。</span></p></div><div class="footer-right"><p class="mb-0"> 本站由 <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> 生成，采用 <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a> 主题。</p></div></div></footer></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-12 col-sm-11 post-content"><div id="search-hints"><h4 class="text-muted mb-4">热门标签</h4></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div><div id="mask"></div><a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button"> <i class="fas fa-angle-up"></i> </a> <script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js"></script> <script> SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/assets/js/data/search.json', searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0"> <a href="{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5"></p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script> <script src="https://cdn.jsdelivr.net/combine/npm/lozad/dist/lozad.min.js,npm/magnific-popup@1/dist/jquery.magnific-popup.min.js,npm/clipboard@2/dist/clipboard.min.js"></script> <script defer src="/assets/js/dist/post.min.js"></script> <script src="https://cdn.jsdelivr.net/combine/npm/popper.js@1.16.1,npm/bootstrap@4/dist/js/bootstrap.min.js"></script> <script defer src="/app.js"></script> <script defer src="https://www.googletagmanager.com/gtag/js?id="></script> <script> document.addEventListener("DOMContentLoaded", function(event) { window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', ''); }); </script>

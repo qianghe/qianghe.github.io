@@ -1,0 +1,249 @@
+<!DOCTYPE html><html lang="zh-CN" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="day-prompt" content="天前"><meta name="hour-prompt" content="小时前"><meta name="minute-prompt" content="分钟前"><meta name="justnow-prompt" content="刚刚"><meta name="generator" content="Jekyll v4.2.2" /><meta property="og:title" content="端开发中的语义化的一些小结" /><meta property="og:locale" content="zh_CN" /><meta name="description" content="语义化作用" /><meta property="og:description" content="语义化作用" /><link rel="canonical" href="/posts/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E8%AF%AD%E4%B9%89%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E7%BB%93/" /><meta property="og:url" content="/posts/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E8%AF%AD%E4%B9%89%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E7%BB%93/" /><meta property="og:site_name" content="UnlimitedZone" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2021-08-15T12:15:20+08:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="端开发中的语义化的一些小结" /><meta name="twitter:site" content="@twitter_username" /><meta name="google-site-verification" content="google_meta_tag_verification" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-08-15T12:15:20+08:00","datePublished":"2021-08-15T12:15:20+08:00","description":"语义化作用","headline":"端开发中的语义化的一些小结","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E8%AF%AD%E4%B9%89%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E7%BB%93/"},"url":"/posts/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E8%AF%AD%E4%B9%89%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E7%BB%93/"}</script><title>端开发中的语义化的一些小结 | UnlimitedZone</title><link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/assets/img/favicons/site.webmanifest"><link rel="shortcut icon" href="/assets/img/favicons/favicon.ico"><meta name="apple-mobile-web-app-title" content="UnlimitedZone"><meta name="application-name" content="UnlimitedZone"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://fonts.gstatic.com"><link rel="preconnect" href="https://www.google-analytics.com" crossorigin="use-credentials"><link rel="dns-prefetch" href="https://www.google-analytics.com"><link rel="preconnect" href="https://www.googletagmanager.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="preconnect" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css"><link rel="stylesheet" href="/assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css"> <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script><body data-spy="scroll" data-target="#toc"><div id="sidebar" class="d-flex flex-column align-items-end" lang="zh-CN"><div class="profile-wrapper text-center"><div id="avatar"> <a href="/" alt="avatar" class="mx-auto"> <img src="https://i.pinimg.com/564x/ad/f4/05/adf40538d318ed1173f509d7b53fa512.jpg" alt="avatar" onerror="this.style.display='none'"> </a></div><div class="site-title mt-3"> <a href="/">UnlimitedZone</a></div><div class="site-subtitle font-italic">learn as if you know nothing</div></div><ul class="w-100"><li class="nav-item"> <a href="/" class="nav-link"> <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i> <span>首页</span> </a><li class="nav-item"> <a href="/categories/" class="nav-link"> <i class="fa-fw fas fa-stream ml-xl-3 mr-xl-3 unloaded"></i> <span>分类</span> </a><li class="nav-item"> <a href="/archives/" class="nav-link"> <i class="fa-fw fas fa-archive ml-xl-3 mr-xl-3 unloaded"></i> <span>归档</span> </a><li class="nav-item"> <a href="/about/" class="nav-link"> <i class="fa-fw fas fa-info ml-xl-3 mr-xl-3 unloaded"></i> <span>关于</span> </a></ul><div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center align-items-center"> <a href="https://github.com/qianghe" aria-label="github" class="order-3" target="_blank" rel="noopener"> <i class="fab fa-github-alt"></i> </a> <a href="https://space.bilibili.com/46113303" aria-label="blibli" class="order-4" target="_blank" rel="noopener"> <i class="fab fa-youtube"></i> </a> <a href=" javascript:location.href = 'mailto:' + ['hqiswonder','gmail.com'].join('@')" aria-label="email" class="order-5" > <i class="fas fa-envelope"></i> </a> <span class="icon-border order-2"></span> <span id="mode-toggle-wrapper" class="order-1"> <i class="mode-toggle fas fa-adjust"></i> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return "mode"; } static get DARK_MODE() { return "dark"; } static get LIGHT_MODE() { return "light"; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } var self = this; /* always follow the system prefers */ this.sysDarkPrefers.addListener(function() { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.updateMermaid(); }); } /* constructor() */ setDark() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { $('html').removeAttr(ModeToggle.MODE_KEY); sessionStorage.removeItem(ModeToggle.MODE_KEY); } get sysDarkPrefers() { return window.matchMedia("(prefers-color-scheme: dark)"); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode == ModeToggle.DARK_MODE; } get isLightMode() { return this.mode == ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer) ) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } updateMermaid() { if (typeof mermaid !== "undefined") { let expectedTheme = (this.modeStatus === ModeToggle.DARK_MODE? "dark" : "default"); let config = { theme: expectedTheme }; /* re-render the SVG › <https://github.com/mermaid-js/mermaid/issues/311#issuecomment-332557344> */ $(".mermaid").each(function() { let svgCode = $(this).prev().children().html(); $(this).removeAttr("data-processed"); $(this).html(svgCode); }); mermaid.initialize(config); mermaid.init(undefined, ".mermaid"); } } flipMode() { if (this.hasMode) { if (this.isSysDarkPrefer) { if (this.isLightMode) { this.clearMode(); } else { this.setLight(); } } else { if (this.isDarkMode) { this.clearMode(); } else { this.setDark(); } } } else { if (this.isSysDarkPrefer) { this.setLight(); } else { this.setDark(); } } this.updateMermaid(); } /* flipMode() */ } /* ModeToggle */ let toggle = new ModeToggle(); $(".mode-toggle").click(function() { toggle.flipMode(); }); </script> </span></div></div><div id="topbar-wrapper" class="row justify-content-center topbar-down"><div id="topbar" class="col-11 d-flex h-100 align-items-center justify-content-between"> <span id="breadcrumb"> <span> <a href="/"> 首页 </a> </span> <span>端开发中的语义化的一些小结</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> 文章</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="搜索..."> <i class="fa fa-times-circle fa-fw" id="search-cleaner"></i> </span> <span id="search-cancel" >取消</span></div></div><div id="main-wrapper"><div id="main"><div class="row"><div id="post-wrapper" class="col-12 col-lg-11 col-xl-8"><div class="post pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><h1 data-toc-skip>端开发中的语义化的一些小结</h1><div class="post-meta text-muted d-flex flex-column"><div> <span class="semi-bold"> WonderQrunMan </span> 发表于 <span class="timeago " data-toggle="tooltip" data-placement="bottom" title="2021-08-15, 12:15 +0800" >2021-08-15<i class="unloaded">2021-08-15T12:15:20+08:00</i> </span></div><div> <span class="readtime" data-toggle="tooltip" data-placement="bottom" title="1438 字">7 分钟 阅读</span></div></div><div class="post-content"><h2 id="语义化作用">语义化作用</h2><p>说到前端的语义化，我瞬间想起的就是3年前去面试，面试官问题：如何理解html的语义化。</p><p>对于document文档来说，dom标签的语义化让其名称言简意赅，了然于胸：</p><ol><li><p>对于维护的人友好，方便理解其表层内涵；</p><li><p>对于机器来说是便于理解的，方便解析优化；</p></ol><h2 id="常见场景">常见场景</h2><ol><li><p>平时常见的语义化场景：</p><ul><li><p>html使用哪些标签：使用语义化的标签代替勤劳楷模“div”；</p><li><p>css如何命名（BEM规范等）：根绝场景定义；</p><li><p>js变量、函数名称、文件名称，这些都是我们对外提供的，为了让人（或者机器）更好的理解其要维护的内容；</p></ul><li><p>在函数内部，如何语义化？</p></ol><ul><li><p>拆解函数，细粒度（单一职责-&gt;功能化）、纯粹（纯函数-&gt;少副作用）；</p><li><p>逃不掉的注解（注解的可用性取决于写注解的人的表达能力）；</p><li><p>对于聚合的功能函数，可以使用compose或者lodash里的flow（可以看作是一种pipe的方式）：</p><p>我们假设一个业务场景，关闭一个modal弹窗后，我们需要：</p><ul><li>重置store；<li>释放router history block资源；<li>跳转到目标页面；</ul></ul><div class="language-javascript highlighter-rouge"><div class="code-header"> <span text-data=" JavaScript "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed=""><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre><span class="c1">// before</span>
+<span class="nx">dispatch</span><span class="p">({</span>
+  <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">reset</span><span class="dl">'</span><span class="p">,</span>
+<span class="p">})</span>
+<span class="p">...</span>
+<span class="nx">unblock</span><span class="p">();</span>
+<span class="nx">history</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">pathname</span><span class="p">,</span> <span class="nx">state</span><span class="p">)</span>
+</pre></table></code></div></div><p>​ 如果通过flow的方式语义化的包裹呢？</p><div class="language-javascript highlighter-rouge"><div class="code-header"> <span text-data=" JavaScript "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed=""><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre><td class="rouge-code"><pre><span class="c1">// after</span>
+<span class="nx">flow</span><span class="p">([</span>
+  <span class="kd">function</span> <span class="nx">resetStore</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">dispatch</span><span class="p">({</span>
+      <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">reset</span><span class="dl">'</span><span class="p">,</span>
+    <span class="p">})</span>
+  <span class="p">},</span>
+  <span class="kd">function</span> <span class="nx">releaseRouteBlockEventResource</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">unblock</span><span class="p">()</span>
+  <span class="p">},</span>
+  <span class="kd">function</span> <span class="nx">jumpToTargetRoute</span> <span class="p">{</span>
+    <span class="nx">history</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">pathname</span><span class="p">,</span> <span class="nx">state</span><span class="p">)</span>
+  <span class="p">},</span>
+<span class="p">])</span>
+</pre></table></code></div></div><p>虽然，多了很多行代码，但这样组合的方式，我个人觉得是更加语义化的（此处，你不需要写注释了），并且起到了功能隔离的作用。</p><ol><li><p>使用React框架，语义化</p><ul><li>组件名称明确且场景化，通过displayName提供，也便于使用dev tools调试时，便于定位组件进行调试；<li>类组件中生命周期已经明确化每个组件每个阶段需要做的事情，内部函数的语义化参考上面的；<li>函数组件没有生命周期，（hook之前）一般是纯UI的组件，明确其props的含义即可；<li>函数组件，通过hook方式提供状态类组件（受控 or 非受控），我们通过其提供的hook函数或者我们自定义的hook进行功能的抽象和封装，而自定义hook的方式（即对hook的命名）已经对其功能语义化了，但我们也可以通过像处理函数流程语义化的方式来处理hook的流程化；</ul><p>​ 同样，我们来for example， 在进入某个页面时，我们需要完成一下职责功能：</p><p>​ a. beforeunload事件注册；</p><p>​ b. routeBlockEvent注册；</p><p>​ c. 请求资源；</p><p>​ d. store的一些初始化(数据同步)；</p><p>​ e. 业务功能的其他监听事件；</p><div class="language-javascript highlighter-rouge"><div class="code-header"> <span text-data=" JavaScript "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed=""><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+</pre><td class="rouge-code"><pre><span class="c1">// before before</span>
+<span class="kd">function</span> <span class="nx">XXXPage</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// a event</span>
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">beforeunload</span><span class="dl">'</span><span class="p">,</span> <span class="nx">xxx</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="nx">xxx</span> <span class="p">}</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">xxx</span><span class="p">])</span>
+  <span class="c1">// b event</span>
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+   <span class="kd">const</span> <span class="nx">unblock</span> <span class="o">=</span> <span class="nx">history</span><span class="p">.</span><span class="nx">block</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="nx">xxx</span><span class="p">})</span>
+      
+   <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="nx">unblock</span><span class="p">()</span> <span class="p">}</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">xxx</span><span class="p">])</span>
+  <span class="c1">// c event</span>
+  <span class="nx">useEffect</span><span class="p">(</span><span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">await</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">([</span><span class="nx">dispatch</span><span class="p">(</span><span class="nx">xxxAction</span><span class="p">),</span> <span class="nx">dispatch</span><span class="p">(</span><span class="nx">xxxAction</span><span class="p">)])</span>
+    <span class="p">...</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">xxx</span><span class="p">])</span>
+  <span class="c1">// d event</span>
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">matchCondition</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">syncData</span><span class="p">(</span><span class="nx">xxx</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="p">....</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">xxx</span><span class="p">])</span>
+  <span class="c1">// e event</span>
+  <span class="nx">useDeepEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// some side effect</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">xxx</span><span class="p">])</span>
+       
+  <span class="k">return</span> <span class="o">&lt;</span><span class="nx">UI</span> <span class="p">{...</span><span class="nx">props</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span><span class="p">}</span>
+</pre></table></code></div></div><p>我们可以看到，我们抽象的逻辑其实可能和view层毫无关系，都是一些全局或者预加载资源；我们可以通过自定义hook的方式将功能抽离，语义化hook的功能。</p><div class="language-javascript highlighter-rouge"><div class="code-header"> <span text-data=" JavaScript "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed=""><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre><td class="rouge-code"><pre><span class="c1">// before</span>
+<span class="kd">function</span> <span class="nx">XXXPage</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// a event</span>
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">beforeunload</span><span class="dl">'</span><span class="p">,</span> <span class="nx">xxx</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="nx">xxx</span> <span class="p">}</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">xxx</span><span class="p">])</span>
+  <span class="c1">// b event</span>
+ <span class="nx">useRouteBlock</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span>
+  <span class="c1">// c event</span>
+ <span class="nx">useGetXXXResource</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span>
+  <span class="c1">// d event</span>
+ <span class="nx">useSyncXXXData</span><span class="p">(</span><span class="nx">props</span><span class="p">),</span>
+  <span class="c1">// e event</span>
+ <span class="nx">useXXXChange</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span>
+   
+  <span class="k">return</span> <span class="o">&lt;</span><span class="nx">UI</span> <span class="p">{...</span><span class="nx">props</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span><span class="p">}</span>
+</pre></table></code></div></div><p>那如何像flow的方式去从代码层面切割这些和View层主逻辑没有太大关系的hook功能呢？这里想到了高阶组件，高阶组件的出现是为了代替mixin，以一个低侵入性的方式抽象更为高阶的逻辑方式。那如何将hook作为props封装高阶组件呢？（这里参考了<a href="https://github.com/juliettepretot/hook-into-props/tree/1e069a6c01c2a783100f2fea7709f56d8166a97e">hooks-into-props</a>）其仅支持单一hook）。</p><div class="language-javascript highlighter-rouge"><div class="code-header"> <span text-data=" JavaScript "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed=""><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+</pre><td class="rouge-code"><pre><span class="c1">// hook执行暴露的返回</span>
+<span class="kd">const</span> <span class="nx">getMergedHooksProps</span> <span class="o">=</span> <span class="p">(</span><span class="nx">useHooks</span><span class="p">,</span> <span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span>
+  <span class="nx">useHooks</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">mergedHookProps</span><span class="p">,</span> <span class="nx">useHook</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">hookActions</span> <span class="o">=</span> <span class="nx">useHook</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="o">??</span> <span class="p">{}</span>
+   
+    <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">hookActions</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">mergedHookProps</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">hookActions</span>
+    <span class="p">}</span>
+   
+    <span class="k">return</span> <span class="nx">mergedHookProps</span>
+  <span class="p">},</span> <span class="p">{})</span>
+   
+<span class="c1">// hooks into props</span>
+<span class="kd">const</span> <span class="nx">hooksIntoProps</span> <span class="o">=</span>
+  <span class="p">(...</span><span class="nx">useHooks</span><span class="p">)</span> <span class="o">=&gt;</span>
+    <span class="p">(</span><span class="nx">Component</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">EnhancedComponentWithHooks</span> <span class="o">=</span> <span class="nx">forwardRef</span><span class="p">((</span><span class="nx">props</span><span class="p">,</span> <span class="nx">ref</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">Component</span><span class="p">,</span> <span class="p">{</span>
+          <span class="nx">ref</span><span class="p">,</span>
+          <span class="p">...</span><span class="nx">props</span><span class="p">,</span>
+          <span class="p">...</span><span class="nx">getMergedHooksProps</span><span class="p">(</span><span class="nx">useHooks</span><span class="p">,</span> <span class="nx">props</span><span class="p">),</span>
+        <span class="p">})</span>
+      <span class="p">})</span>
+   
+      <span class="nx">EnhancedComponentWithHooks</span><span class="p">.</span><span class="nx">displayName</span> <span class="o">=</span> <span class="s2">`EnhancedComponentWithHooks(</span><span class="p">${</span>
+      <span class="nx">Component</span><span class="p">.</span><span class="nx">displayName</span> <span class="o">||</span> <span class="nx">Component</span><span class="p">.</span><span class="nx">name</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">Component</span><span class="dl">'</span>
+    <span class="p">}</span><span class="s2">)`</span>
+   
+      <span class="k">return</span> <span class="nx">hoistNonReactStatics</span><span class="p">(</span><span class="nx">EnhancedComponentWithHooks</span><span class="p">,</span> <span class="nx">Component</span><span class="p">)</span>
+    <span class="p">}</span>
+   
+<span class="k">export</span> <span class="k">default</span> <span class="nx">hooksIntoProps</span>
+</pre></table></code></div></div><p>此时，我们可以通过高阶函数的方式注入hook功能了：</p><div class="language-javascript highlighter-rouge"><div class="code-header"> <span text-data=" JavaScript "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed=""><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre><td class="rouge-code"><pre><span class="c1">// now</span>
+<span class="nx">hooksIntoProps</span><span class="p">(</span>
+  <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// reload前询问</span>
+    <span class="nx">useEventListener</span><span class="p">({</span>
+      <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">beforeunload</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">cb</span><span class="p">:</span> <span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">ev</span><span class="p">.</span><span class="nx">returnValue</span> <span class="o">=</span> <span class="nx">tipLabel</span>
+        <span class="k">return</span> <span class="kc">false</span>
+      <span class="p">},</span>
+    <span class="p">})</span>
+  <span class="p">},</span>
+  <span class="c1">// route切换前询问</span>
+  <span class="nx">useRouteBlock</span><span class="p">,</span>
+  <span class="c1">// 请求资源</span>
+  <span class="nx">useGetXXXResource</span><span class="p">,</span>
+  <span class="c1">// 同步数据</span>
+  <span class="nx">useSyncXXXData</span><span class="p">,</span>
+  <span class="c1">// ...</span>
+  <span class="nx">useXXXChange</span><span class="p">,</span>
+<span class="p">)(</span><span class="nx">XXXPage</span><span class="p">)</span>
+</pre></table></code></div></div><p>这种方式，非常直观明了的展示，我们对这个页面进行了哪些操作，而不是面条式的堆叠了代码，并且给予了更好的语义化。</p></ol><p>（其他场景之后待补充…）</p></div><div class="post-tail-wrapper text-muted"><div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href='/categories/js/'>js</a></div><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"> 本文由作者按照 <a href="https://creativecommons.org/licenses/by/4.0/"> CC BY 4.0 </a> 进行授权</div><div class="share-wrapper"> <span class="share-label text-muted mr-1">分享</span> <span class="share-icons"> <a href="https://twitter.com/intent/tweet?text=端开发中的语义化的一些小结 - UnlimitedZone&url=/posts/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E8%AF%AD%E4%B9%89%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E7%BB%93/" data-toggle="tooltip" data-placement="top" title="Twitter" target="_blank" rel="noopener" aria-label="Twitter"> <i class="fa-fw fab fa-twitter"></i> </a> <a href="https://www.facebook.com/sharer/sharer.php?title=端开发中的语义化的一些小结 - UnlimitedZone&u=/posts/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E8%AF%AD%E4%B9%89%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E7%BB%93/" data-toggle="tooltip" data-placement="top" title="Facebook" target="_blank" rel="noopener" aria-label="Facebook"> <i class="fa-fw fab fa-facebook-square"></i> </a> <a href="https://telegram.me/share?text=端开发中的语义化的一些小结 - UnlimitedZone&url=/posts/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E8%AF%AD%E4%B9%89%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E7%BB%93/" data-toggle="tooltip" data-placement="top" title="Telegram" target="_blank" rel="noopener" aria-label="Telegram"> <i class="fa-fw fab fa-telegram"></i> </a> <i id="copy-link" class="fa-fw fas fa-link small" data-toggle="tooltip" data-placement="top" title="" title-succeed=""> </i> </span></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 pl-2 text-muted topbar-down"><div class="access"><div id="access-lastmod" class="post"> <span>最近更新</span><ul class="post-content pl-0 pb-1 ml-1 mt-2"><li><a href="/posts/%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E5%9B%BE%E7%89%87%E7%9A%84%E5%AE%9E%E9%99%85%E7%B1%BB%E5%9E%8B/">如何判断图片的实际类型?</a><li><a href="/posts/@redux-tooltik%E6%98%AF%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8immer%E7%9A%84/">@redux-tooltik是如何使用immer的？</a><li><a href="/posts/LeetCode-Range-Module/">[Leetcode Range Module]-算法解析</a><li><a href="/posts/Popup%E5%A6%82%E4%BD%95%E8%BF%BD%E8%B8%AA%E5%AD%90%E7%BB%84%E4%BB%B6%E6%B8%B2%E6%9F%93%E6%97%B6%E6%9C%BA/">Popup如何追踪子组件渲染时机</a></ul></div></div><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.js"></script><div id="toc-wrapper" class="pl-0 pr-4 mb-5"> <span class="pl-3 pt-2 mb-2">文章内容</span><nav id="toc" data-toggle="toc"></nav></div></div></div><div class="row"><div class="col-12 col-lg-11 col-xl-8"><div id="post-extend-wrapper" class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><div id="related-posts" class="mt-5 mb-2 mb-sm-4"><h3 class="pt-2 mt-1 mb-4 ml-1" data-toc-skip>相关文章</h3><div class="card-deck mb-4"><div class="card"> <a href="/posts/Axios%E6%98%AF%E5%A6%82%E4%BD%95%E5%8F%96%E6%B6%88%E4%B8%80%E4%B8%AArequest/"><div class="card-body"> <span class="timeago small" >2021-08-13<i class="unloaded">2021-08-13T22:33:21+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>Axios是如何取消一个request？</h3><div class="text-muted small"><p> 前端同学对axios都非常熟悉，它是活跃在大家项目里负责网络请求的热门库。在业务项目中，我们通常会配置化axios的使用实例（如指定baseUrl、timeout等），方便好用的request和response拦截器也提供了通用逻辑处理的方式。 今天想谈论的一个问题是，axios是如何取消一个已发送的request的呢？ 问题场景 那为什么需要处理这个问题呢？我们平时遇到的哪些业务场景...</p></div></div></a></div><div class="card"> <a href="/posts/js%E5%AE%9E%E7%8E%B0PriorityQueue%E7%B1%BB/"><div class="card-body"> <span class="timeago small" >09-16<i class="unloaded">2022-09-16T15:08:00+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>js实现PriorityQueue类</h3><div class="text-muted small"><p> js原生是没有提供这种复杂数据结构的（默默的羡慕一下java的世界）。 为什么需要这种结构的呢？这种结构的优势又是什么呢？ Queue vs PriorityQueue 我们对这个词都不陌生，女王，哦，不，是：队列。 队列的特点就是“先进先出”，进、出的时间效率都是O(1)；在js世界中，使用朴素的Array结构就可以模拟。那如果进、出都是有条件的，我们会怎么处理呢？ 比如，一堆学生在一...</p></div></div></a></div><div class="card"> <a href="/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%A7%A3%E5%86%B3%E6%95%B0%E6%8D%AE%E4%BE%9D%E8%B5%96%E7%9A%84%E9%97%AE%E9%A2%98/"><div class="card-body"> <span class="timeago small" >09-16<i class="unloaded">2022-09-16T15:08:00+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>如何使用数据结构解决数据依赖的问题</h3><div class="text-muted small"><p> 背景 比如如下的场景，在一个数据洞察的场景下，筛选器之间的值存在相互的依赖关系（但不会构成环）； 这个图中标注了筛选器之间的依赖关系。那我们如何能更好的抽象一种能力，去解决这种依赖关系呢？ 树结构 通过这个图和实际场景的逻辑关系，我们能发现，箭头是不会构成环的，否则会导致依赖无限循环下去。 根据上图的案例我们可以抽象出其有向图的结构： 比如，我们切换了province，那在图...</p></div></div></a></div></div></div><div class="post-navigation d-flex justify-content-between"> <a href="/posts/%E5%A6%82%E4%BD%95%E7%94%A8react-hooks%E5%B0%81%E8%A3%85%E5%8A%9F%E8%83%BD%E4%B9%8B%E5%88%87%E6%8D%A2%E6%B7%B1%E6%B5%85%E6%A8%A1%E5%BC%8F/" class="btn btn-outline-primary" prompt="上一篇"><p>如何用react hooks封装功能之切换 Dark/Light Mode？</p></a> <a href="/posts/redux%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/" class="btn btn-outline-primary" prompt="下一篇"><p>【源码解读】之 Redux源码解析</p></a></div></div></div></div><footer class="d-flex w-100 justify-content-center"><div class="d-flex justify-content-between align-items-center"><div class="footer-left"><p class="mb-0"> © 2022 <a href="https://github.com/qianghe">WonderQrunMan</a>. <span data-toggle="tooltip" data-placement="top" title="除非另有说明，本网站上的博客文章均由作者按照知识共享署名 4.0 国际 (CC BY 4.0) 许可协议进行授权。">保留部分权利。</span></p></div><div class="footer-right"><p class="mb-0"> 本站由 <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> 生成，采用 <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a> 主题。</p></div></div></footer></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-12 col-sm-11 post-content"><div id="search-hints"><h4 class="text-muted mb-4">热门标签</h4></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div><div id="mask"></div><a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button"> <i class="fas fa-angle-up"></i> </a> <script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js"></script> <script> SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/assets/js/data/search.json', searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0"> <a href="{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5"></p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script> <script src="https://cdn.jsdelivr.net/combine/npm/lozad/dist/lozad.min.js,npm/magnific-popup@1/dist/jquery.magnific-popup.min.js,npm/clipboard@2/dist/clipboard.min.js"></script> <script defer src="/assets/js/dist/post.min.js"></script> <script src="https://cdn.jsdelivr.net/combine/npm/popper.js@1.16.1,npm/bootstrap@4/dist/js/bootstrap.min.js"></script> <script defer src="/app.js"></script> <script defer src="https://www.googletagmanager.com/gtag/js?id="></script> <script> document.addEventListener("DOMContentLoaded", function(event) { window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', ''); }); </script>
